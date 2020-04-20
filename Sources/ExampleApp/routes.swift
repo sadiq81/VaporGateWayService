@@ -1,26 +1,15 @@
 import Vapor
-import Twilio
+import Gateway
 
 /// Register your application's routes here.
 func routes(_ app: Application) throws {
-    // Basic "It works" example
-    //(831) 610-0806
+    // Basic "Hello world" example
     app.get { req -> EventLoopFuture<ClientResponse> in
-        let sms = OutgoingSMS(body: "Hey There", from: "+18316100806", to: "+14083688346")
-
-        return req.twilio.send(sms)
+        let recipient = Recipient(msisdn: 4526241436)
+        let sms = OutgoingSMS(message: "Hello world", sender: "Mustache", recipients: [recipient])
+        return req.gateway.send(sms)
     }
 
-    app.post("incoming") { req -> Response in
-        let sms = try req.content.decode(IncomingSMS.self)
-
-        let responseMessage = SMSResponse(
-            Message(body: "Hello Friend!"),
-            Message(body: "This is a second text.")
-        )
-
-        return req.twilio.respond(with: responseMessage)
-    }
 }
 
 

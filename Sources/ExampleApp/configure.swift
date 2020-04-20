@@ -1,9 +1,9 @@
 import Vapor
-import Twilio
+import Gateway
 
 /// Called before your application initializes.
 public func configure(_ app: Application) throws {
-    app.twilio.configuration = .environment
+    app.gateway.configuration = .environment
     
     try routes(app)
 }
