@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "VaporGateWayService",
+    name: "VaporGatewayService",
     platforms: [
        .macOS(.v10_15)
     ],
